@@ -1,11 +1,14 @@
-import React from 'react';
-import { connect } from "dva";
-import Product from './Product';
+import React from "react";
+import Product from "./Product";
 
-function ProductList({ products = [] }){
-    return products?.map((product, index) => {
-            return <Product key={product?.id || index} item={product} />
-        });
+function ProductList({ products = [] }) {
+  return (
+    <div className="row">
+      {products?.map((product) => {
+        return <Product key={product?.id} data={product} />;
+      })}
+    </div>
+  );
 }
 
-export default connect(state => ({ products: state.product?.products }))(ProductList);
+export default ProductList;

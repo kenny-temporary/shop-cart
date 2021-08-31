@@ -1,57 +1,57 @@
-import { SortPreset, noop } from '@/utils/preset';
-import { getProductsService } from '@/services/product';
+import { getProductsService } from "@/services/product";
+import {
+  multidimensionalDistinct,
+  aggregateIntoArray,
+  switchArrayItem,
+  intersection,
+} from "@/utils/distinct";
 
 export default {
-
-  namespace: 'product',
+  namespace: "product",
 
   state: {
     products: [],
+    specifications: [],
+    selected: [],
+    originProducts: [],
   },
 
   effects: {
-    *getProducts({ payload }, { call, put }) {
-      const products = yield call(getProductsService);
-      yield put({ type: 'save', payload: { products } });
-    }
+    *getProducts(_, { call, put }) {
+      const { data } = yield call(getProductsService);
+
+      const products = data?.products || [];
+      const availableSizes = aggregateIntoArray(products, "availableSizes");
+      const specifications = multidimensionalDistinct(availableSizes);
+
+      yield put({
+        type: "save",
+        payload: {
+          products,
+          specifications,
+          originProducts: products,
+        },
+      });
+    },
   },
 
   reducers: {
-    filterProducts(state, action){},
+    filterProducts(state, { payload }) {
+      const selected = switchArrayItem(state?.selected, payload?.specification);
+
+      const products =
+        selected.length <= 0
+          ? state?.originProducts
+          : state?.originProducts?.reduce((acc, product) => {
+              /** 选中和availableSizes存在交集 */
+              const commoned = intersection(selected, product?.availableSizes);
+              return commoned?.length > 0 ? [...acc, product] : acc;
+            }, []);
+      return { ...state, selected, products };
+    },
 
     save(state, action) {
       return { ...state, ...action.payload };
     },
   },
 };
-
-
-export class GetProductActionEffect {
-  type = 'product/getProducts';
-  
-  payload = {};
-
-  constructor(options = {}) {
-    const { limit, offset, ...restParams } = { limit: 10, offset:1, ...options };
-    this.payload = { limit, offset };
-    this.extract = restParams;
-  };
-}
-
-export class FilterActionPure {
-  type = 'product/filterProducts';
-
-  payload = {};
-  constructor(rules = []){
-    this.payload = { rules };
-  };
-}
-
-export class SortActionPure {
-  type = 'product/sortProducts';
-  payload = {};
-
-  constructor(sort = SortPreset.Nil, rule = noop){
-    this.payload = { sort, rule };
-  }
-}
