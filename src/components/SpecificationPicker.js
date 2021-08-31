@@ -1,6 +1,7 @@
 import React from "react";
+import classnames from "classnames";
 import { FilterActionPure } from "@/actions/product";
-import style from './specification.less';
+import style from "./specification.less";
 
 function SpecificationPicker({ specifications, selected, dispatch }) {
   const handleSwitchSpecication = (specification) => {
@@ -8,29 +9,35 @@ function SpecificationPicker({ specifications, selected, dispatch }) {
   };
 
   return (
-    <ul className={style.specificationPickerController}>
+    <ul
+      className={classnames(
+        "row justify-content-lg-start justify-content-center px-4",
+        style.specificationPickerController
+      )}
+    >
+      <h5>Size:</h5>
       {specifications?.map((specification) => {
         return (
           <li
+            className="col col-lg-3 col-1 mb-3"
             key={specification}
-            style={{
-              height: "2rem",
-              width: "2rem",
-              borderRadius: "50%",
-              textAlign: "center",
-              lineHeight: "2rem",
-              fontSize: "0.65rem",
-
-              backgroundColor: selected?.includes(specification)
-                ? "RED"
-                : "GREEN",
-            }}
             onClick={() => handleSwitchSpecication(specification)}
           >
-            {specification}
+            <div
+              className={style.item}
+              style={{
+                backgroundColor: selected?.includes(specification)
+                  ? "#1b1a20"
+                  : "#ececec",
+                color: selected?.includes(specification)? "white": "black"
+              }}
+            >
+              {specification}
+            </div>
           </li>
         );
       })}
+      Leave a star on Github if this repository was useful :)
     </ul>
   );
 }

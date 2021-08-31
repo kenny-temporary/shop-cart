@@ -3,12 +3,9 @@ import "./clear.css";
 
 // 1. Initialize
 const app = dva({
-    onStateChange(){
-        console.log('Initializing', app._store.getState()) 
-    },
     onReducer: function (reducer) {
         return (state, action) => {
-            console.log('--->>', action, reducer(state, action));
+            // console.log('--->>', action, reducer(state, action));
             return reducer(state, action);
         }
     }
