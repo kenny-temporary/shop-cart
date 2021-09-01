@@ -1,11 +1,12 @@
 import dva from 'dva';
+import { persistencePurchases } from '@/services/persistence';
 import "./common/clear.less";
 
 // 1. Initialize
 const app = dva({
     onReducer: function (reducer) {
         return (state, action) => {
-            // console.log('--->>', action, reducer(state, action));
+            persistencePurchases(reducer, state, action);
             return reducer(state, action);
         }
     }
