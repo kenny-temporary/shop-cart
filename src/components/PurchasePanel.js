@@ -26,7 +26,7 @@ function PurchasePanel({ purchase, dispatch }) {
       behavior: "smooth",
       block: "end",
     });
-    return () => (panelRef.current = "");
+    // return () => (panelRef.current = "");
   }, [purchase?.purchases]);
 
   const purchases = purchase?.purchases;
