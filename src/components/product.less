@@ -1,19 +1,55 @@
+@import url("../common/utils.less");
+@import url("../common/var.less");
+
 .productItem {
-    border: 1px solid rgba(255, 255, 255, 0);
-    &:hover {
-        border:  1px solid #e7eaed;
-    }
+  border: 1px solid @main-color;
+
+  &:hover {
+    border: 1px solid @secondary-border-color;
+  }
+
+  .freeShipping {
+    font-size: @mini-font-size;
+    background-color: @main-color;
+    padding: @small-container-padding;
+  }
+
+  .productImageContainer {
+    .img-container-aspect-ratio(3, 4);
+  }
+
+  .productItemTitle {
+    .flex-completely-centered;
+    height: 3rem;
+    text-align: center;
+    font-size: @sub-font-size;
+  }
 }
 
-.addPurchaseBtn {
-    text-align: center;
-    width: 100%;
-    background-color: black;
-    color: white;
-    padding: 15px 0;
+.addPurchaseBtnBase {
+  text-align: center;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 0.68rem 0;
+  font-size: 0.6rem;
 
-    &:hover {
-        background-color: #eabf00;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: #eabf00;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .addPurchaseBtn {
+    .addPurchaseBtnBase;
+    display: none;
+  }
+}
+
+@media screen {
+  .addPurchaseBtn {
+    .addPurchaseBtnBase;
+    display: black;
+  }
 }

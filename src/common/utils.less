@@ -1,0 +1,24 @@
+.flex-completely-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.none-mp {
+    margin: 0;
+    padding: 0;
+}
+
+.container-aspect-ratio(@width, @height) {
+    aspect-ratio: @width / @height;
+}
+
+.img-container-aspect-ratio(@width:3, @height:4) {
+    .container-aspect-ratio(@width, @height);
+    img {
+        border: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}

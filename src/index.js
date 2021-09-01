@@ -1,5 +1,5 @@
 import dva from 'dva';
-import "./clear.css";
+import "./common/clear.less";
 
 // 1. Initialize
 const app = dva({

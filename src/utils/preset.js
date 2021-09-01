@@ -5,4 +5,10 @@ export const SortPreset = {
     Nil: "Nil",
 }
 
+export const PurchaseActionsPreset = {
+    Decrease: "Decrease",
+    Incremental: "Incremental",
+    Clear: "Clear",
+}
+
 export const noop = () => {}
