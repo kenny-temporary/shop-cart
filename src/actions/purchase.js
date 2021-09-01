@@ -7,24 +7,38 @@ export class AddPurchaseActionEffect {
     product: {},
   };
   constructor(sku, product) {
-    this.payload = { 
-        sku,
-        product
+    this.payload = {
+      sku,
+      product,
     };
   }
 }
 
-export class DelPurchaseActionEffect {
-    type = "purchase/removeProductFromPurchases";
-    payload = {
-        sku: "",
-        type: PurchaseActionsPreset.Decrease,
-    }
-    constructor(sku, type){
-        this.payload = { type: type, sku }
-    }
+export class MinusPurchaseActionEffect {
+  type = "purchase/minusProductToPurchases";
+  payload = {
+    sku: ''
+  }
+  constructor(sku) {
+    this.payload = { sku };
+  }
+}
+
+export class RemovePurchaseActionEffect {
+  type = "purchase/removeProductFromPurchases";
+  payload = {
+    sku: "",
+    type: "",
+  };
+  constructor(sku, type = PurchaseActionsPreset.Remove) {
+    this.payload = { type: type, sku };
+  }
 }
 
 export class ClearPurchaseActionEffect {
-    type = "purchase/clearPurchases";
+  type = "purchase/clearPurchases";
+}
+
+export class ClosePurchasePanelPure {
+  type = "purchase/closePanel";
 }

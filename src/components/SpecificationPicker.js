@@ -15,11 +15,11 @@ function SpecificationPicker({ specifications, selected, dispatch }) {
         style.specificationPickerController
       )}
     >
-      <h5>Size:</h5>
+      <h6>Size:</h6>
       {specifications?.map((specification) => {
         return (
           <li
-            className="col col-lg-3 col-1 mb-3"
+            className="col col-lg-3 col-1 mb-3 mx-lg-0 mx-2"
             key={specification}
             onClick={() => handleSwitchSpecication(specification)}
           >
@@ -37,7 +37,6 @@ function SpecificationPicker({ specifications, selected, dispatch }) {
           </li>
         );
       })}
-      Leave a star on Github if this repository was useful :)
     </ul>
   );
 }

@@ -1,11 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import classnames from "classnames";
-import {
-  AddPurchaseActionEffect,
-  DelPurchaseActionEffect,
-  ClearPurchaseActionEffect,
-} from "@/actions/purchase";
+import { AddPurchaseActionEffect } from "@/actions/purchase";
 import styles from "./product.less";
 
 function Product({ data, dispatch }) {
@@ -33,7 +29,10 @@ function Product({ data, dispatch }) {
       )}
 
       <div className={styles.productImageContainer}>
-        <img src={require(`../assets/products/${data.sku}_1.jpg`)} />
+        <img
+          src={require(`../assets/products/${data?.sku}_1.jpg`)}
+          alt="产品占位图"
+        />
       </div>
 
       <div className={styles.productItemTitle}>{data?.title}</div>

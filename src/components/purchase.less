@@ -1,0 +1,76 @@
+@import url("../common/utils.less");
+@import url("../common/var.less");
+
+.purchaseContainer {
+  .d-flex;
+  justify-content: space-between;
+  border-bottom: 1px solid @main-text-color;
+
+  .purchaseDescription {
+    .d-flex;
+    flex: 9;
+
+    .productMiniImage {
+      flex: 1;
+      .img-container-aspect-ratio(3, 4);
+      background-color: #fff;
+    }
+
+    ul {
+      flex: 9;
+      margin-left: 1rem;
+      li {
+        font-size: 1.02rem;
+        color: @main-purchase-color;
+        &:first-child {
+          font-weight: bold;
+          color: @main-text-color-light;
+        }
+      }
+    }
+  }
+
+  .productActionContainer {
+    .d-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  
+    .fakeCloseBtn {
+      text-align: right;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color:antiquewhite;
+      cursor: pointer;
+    }
+  
+    .price {
+      font-size: 1.2rem;
+      color: #eabf00;
+      font-weight: bold;
+    }
+
+    .actionBtnGroup {
+      display: flex;
+
+      span {
+        color: aliceblue;
+        display: block;
+        font-size: 0.96rem;
+        padding: 0.24rem 0.75rem;
+        background-color: black;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.active {
+  color: aliceblue !important;
+}
+
+.disable {
+  color: #363537 !important;
+  cursor: no-drop !important;
+}

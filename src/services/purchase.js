@@ -17,9 +17,21 @@ export function addPurchases(previousPurchases = {}, { sku, product }) {
   return nextWorkPurchases;
 }
 
-export function removePurchases(sku, previousPurchases = {}) {
+export function minusPurchases(previousPurchases = {}, sku) {
+  const targetPurchase = previousPurchases?.[sku];
+  return {
+    ...previousPurchases,
+    [sku]: { ...targetPurchase, number: targetPurchase?.number -1 }
+  }
+}
+
+export function removePurchases(previousPurchases = {}, sku) {
   // XXX: 副作用
   // TODO: 使用omit来替换delete的操作
   delete previousPurchases[sku];
   return previousPurchases;
+}
+
+export function clearPurchases(){
+  return {};
 }

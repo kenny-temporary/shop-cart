@@ -1,4 +1,9 @@
-import { addPurchases, removePurchases } from "@/services/purchase";
+import {
+  addPurchases,
+  removePurchases,
+  minusPurchases,
+  clearPurchases,
+} from "@/services/purchase";
 import { objectIterateSum } from "@/utils/distinct";
 
 function calcPurchasesTotalPrice(purchases = {}, key = "number") {
@@ -14,6 +19,7 @@ export default {
   state: {
     purchases: {},
     totailPrice: 0,
+    openPannel: false,
   },
 
   effects: {
@@ -25,7 +31,11 @@ export default {
 
       yield put({
         type: "save",
-        payload: { purchases: nextWorkPurchases, totailPrice },
+        payload: {
+          purchases: nextWorkPurchases,
+          totailPrice,
+          openPannel: true,
+        },
       });
     },
 
@@ -40,12 +50,36 @@ export default {
       });
     },
 
-    *clearPurchases() {},
+    *minusProductToPurchases({ payload }, { put, select }) {
+      const purchases = yield select((state) => state?.purchase?.purchases);
+      const nextWorkPurchases = minusPurchases(purchases, payload?.sku);
+      const totailPrice = calcPurchasesTotalPrice(nextWorkPurchases);
+      yield put({
+        type: "save",
+        payload: { purchases: nextWorkPurchases, totailPrice },
+      });
+    },
+
+    *clearPurchases(_, { put }) {
+      const nextWorkPurchases = clearPurchases();
+      yield put({
+        type: "save",
+        payload: {
+          purchases: nextWorkPurchases,
+          totailPrice: 0,
+          openPannel: false,
+        },
+      });
+    },
   },
 
   reducers: {
     save(state, action) {
       return { ...state, ...action?.payload };
     },
+
+    closePanel(state){
+      return { ...state, openPannel: false };
+    }
   },
 };

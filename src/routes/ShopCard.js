@@ -10,6 +10,7 @@ import { GetProductActionEffect } from "@/actions/product";
 const ProductListWthState = InjectStoreHoc(ProductList, ({ product }) => ({
   products: product?.products,
 }));
+const PurchasePanelWthState = InjectStoreHoc(PurchasePanel, ({ purchase }) => ({ purchase: purchase }));
 const SpecificationPickerWthState = InjectStoreHoc(
   SpecificationPicker,
   ({ product }) => ({
@@ -31,7 +32,7 @@ function ShopCard({ dispatch, products }) {
         </nav>
         
         <section className="col col-lg-10 col-12">
-          <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-start align-items-center">
+          <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-start align-items-center  mb-4">
             <div>{products?.length} Product(s) found</div>
             <SortPicker />
           </div>
@@ -39,7 +40,7 @@ function ShopCard({ dispatch, products }) {
         </section>
       </main>
 
-      <PurchasePanel />
+      <PurchasePanelWthState />
     </div>
   );
 }

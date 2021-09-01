@@ -1,0 +1,75 @@
+@import url("../common/utils.less");
+@import url("../common/var.less");
+
+@media screen and (min-width: 768px){
+  .drawerWarrper {
+    width: 32% !important;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .drawerWarrper {
+    width: 100% !important;
+  }
+}
+
+.panelContent {
+  height: 100%;
+  position: relative;
+
+  .purchaseContent {
+    height: calc(100% - 16%);
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+  }
+
+  .panelTotalPanel {
+    position: absolute;
+    bottom: 0;
+    padding: 5% 0;
+    width: 100%;
+    background-color: #1b1a20;
+
+    & > ul {
+      .d-flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      & > li:first-child {
+        color: @main-purchase-color;
+        font-size: 1.02rem;
+      }
+
+       & > li:nth-child(2) {
+        // align-self: flex-end;
+        text-align: right;
+
+        .totalPanelText {
+          color: #eabf00;
+          font-size: 1.68rem;
+          font-weight: bold;
+        }
+
+        div {
+            font-size: 0.78rem;
+            color: @main-purchase-color;
+        }
+      }
+    }
+
+    .fakeSumitPurchaseBtn {
+      padding: 3% 0;
+      text-align: center;
+      background-color: rgb(29, 28, 28);
+      font-weight: bold;
+      cursor: pointer;
+      &:hover {
+        background-color: black;
+      }
+    }
+  }
+}

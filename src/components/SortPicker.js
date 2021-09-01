@@ -1,18 +1,28 @@
 import React from "react";
 import { connect } from "dva";
+import { Select } from "antd";
 import { SortActionPure } from "@/actions/product";
 import { SortPreset } from "@/utils/preset";
 
-function SortPicker({ dispatch }) {
-  const handleSort = (sortType) =>
-    dispatch({ ...new SortActionPure(sortType) });
+const { Option } = Select;
 
+function SortPicker({ dispatch }) {
+  const handleSort = (sortType) => {
+  console.log(sortType);
+    dispatch({ ...new SortActionPure(sortType) });
+  }
   return (
     <div>
-      Order by 
-      <li onClick={() => handleSort(SortPreset.Asc)}>升序</li>
-      <li onClick={() => handleSort(SortPreset.Desc)}>降序</li>
-      <li onClick={() => handleSort(SortPreset.Nil)}>重置</li>
+      <span style={{ fontSize: "1rem" }}>Order by </span>
+      <Select
+        defaultValue={SortPreset.Nil}
+        onChange={handleSort}
+        style={{ width: '10rem' }}
+      >
+        <Option value={SortPreset.Nil}>Reset</Option>
+        <Option value={SortPreset.Asc}>Lowest to highest</Option>
+        <Option value={SortPreset.Desc}>Highest to lowest</Option>
+      </Select>
     </div>
   );
 }

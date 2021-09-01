@@ -9,6 +9,7 @@ export const PurchaseActionsPreset = {
     Decrease: "Decrease",
     Incremental: "Incremental",
     Clear: "Clear",
+    Remove: "Remove",
 }
 
 export const noop = () => {}
