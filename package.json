@@ -2,8 +2,10 @@
   "private": true,
   "scripts": {
     "start": "roadhog server",
-    "build": "roadhog build"
+    "build": "roadhog build",
+    "publish": "rm -fr ./dist && yarn run build && gh-pages -d dist -b deploy"
   },
+
   "dependencies": {
     "antd": "^4.16.13",
     "babel-plugin-import": "^1.13.3",
