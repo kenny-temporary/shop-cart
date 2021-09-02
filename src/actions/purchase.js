@@ -40,5 +40,5 @@ export class ClearPurchaseActionEffect {
 }
 
 export class ClosePurchasePanelPure {
-  type = "purchase/closePanel";
+  type = "purchase/switchPanel";
 }

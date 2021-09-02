@@ -78,8 +78,8 @@ export default {
       return { ...state, ...action?.payload };
     },
 
-    closePanel(state){
-      return { ...state, openPannel: false };
+    switchPanel(state){
+      return { ...state, openPannel: !state?.openPannel };
     }
   },
 };
