@@ -18,15 +18,8 @@ function PurchasePanel({ purchase, dispatch }) {
   const panelRef = React.useRef();
 
   React.useEffect(() => {
-    // TODO: 修复不自动滚动到底部操作
-
-    // NOTE: eslint 错误原因：期待一个附值而是一个表达式，But这里我们不需要附值
     // eslint-disable-next-line
-    panelRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-    });
-    // return () => (panelRef.current = "");
+    panelRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [purchase?.purchases]);
 
   const purchases = purchase?.purchases;
@@ -41,7 +34,7 @@ function PurchasePanel({ purchase, dispatch }) {
 
   // XXX: 提交部分逻辑抽离
   const handleSumitPurchase = () => {
-    Modal.confirm({
+    Modal.success({
       content: `Checkout - Subtotal: $: ${purchase?.totailPrice}`,
       onCancel: () => {
         dispatch(new ClearPurchaseActionEffect());
@@ -51,6 +44,8 @@ function PurchasePanel({ purchase, dispatch }) {
         dispatch(new ClearPurchaseActionEffect());
         Modal.destroyAll();
       },
+      confirmLoading: true,
+      okButtonProps: { style: { backgroundColor: drawerBg, border: "none" } },
     });
   };
 
