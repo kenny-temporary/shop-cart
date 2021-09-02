@@ -5,6 +5,7 @@ import {
   clearPurchases,
 } from "@/services/purchase";
 import { objectIterateSum } from "@/utils/distinct";
+import { storage } from "@/services/persistence";
 
 function calcPurchasesTotalPrice(purchases = {}, key = "number") {
   const totalPrice = objectIterateSum(purchases, `.${key}`, (value, item) => {
@@ -71,6 +72,26 @@ export default {
         },
       });
     },
+
+    *updatePurchases(_, { put, select }) {
+      const purchases = yield select((state) => state?.purchase?.purchases);
+
+      if (Object.keys(purchases).length === 0) {
+        const prefix = storage.getPrefix();
+        const persistencePurchases = storage.get(prefix + "purchases");
+        const openPannel = storage.get(prefix + "pannelStatus");
+        const totailPrice = storage.get(prefix + 'totailPrice');
+
+        yield put({
+          type: "save",
+          payload: {
+            purchases: persistencePurchases,
+            openPannel,
+            totailPrice
+          },
+        });
+      }
+    },
   },
 
   reducers: {
@@ -78,8 +99,14 @@ export default {
       return { ...state, ...action?.payload };
     },
 
-    switchPanel(state){
+    switchPanel(state) {
       return { ...state, openPannel: !state?.openPannel };
-    }
+    },
+  },
+
+  subscriptions: {
+    setup({ dispatch }) {
+      dispatch({ type: "updatePurchases" });
+    },
   },
 };
