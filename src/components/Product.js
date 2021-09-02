@@ -1,13 +1,15 @@
 import React from "react";
 import { connect } from "dva";
 import classnames from "classnames";
+import { intersection } from "@/utils/distinct";
 import { AddPurchaseActionEffect } from "@/actions/purchase";
 import styles from "./product.less";
 
-function Product({ data, dispatch }) {
+function Product({ data, dispatch, selected }) {
   const addProductToPurchases = (data) => {
-    dispatch(new AddPurchaseActionEffect(data?.sku, data));
+    dispatch({ ...new AddPurchaseActionEffect(data?.sku, data) });
   };
+  const checkedSpecifications = intersection(selected, data?.availableSizes);
 
   return (
     <div
@@ -36,13 +38,15 @@ function Product({ data, dispatch }) {
       </div>
 
       <div className={styles.productItemTitle}>{data?.title}</div>
+      <div className={styles.checkedSpecifications}>
+        {checkedSpecifications?.join(" | ")}
+      </div>
       <div className="text-center d-flex justify-content-center">
         <span
           className="d-block"
           style={{ height: "2px", width: "20px", backgroundColor: "#eabf00" }}
         ></span>
       </div>
-
       <div className="text-center mb-3">
         <small>{data?.currencyFormat} </small>
         <span style={{ fontSize: "1.5rem " }}>{data?.price}</span>

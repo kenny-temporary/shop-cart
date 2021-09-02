@@ -15,7 +15,7 @@ function SpecificationPicker({ specifications, selected, dispatch }) {
         style.specificationPickerController
       )}
     >
-      <h6>Size:</h6>
+      <h6 className="text-lg-start fs-5 text-center">Size</h6>
       {specifications?.map((specification) => {
         return (
           <li

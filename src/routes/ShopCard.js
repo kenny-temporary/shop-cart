@@ -10,9 +10,10 @@ import classnames from "classnames";
 import styles from "./shopcard.less";
 
 // 注入读取的数据
-const ProductListWthState = InjectStoreHoc(ProductList, ({ product }) => ({
+const ProductListWthState = InjectStoreHoc(ProductList, ({ product, purchase }) => ({
   products: product?.products,
   spinStatus: product?.spinStatus,
+  selected: product?.selected,
 }));
 const PurchasePanelWthState = InjectStoreHoc(PurchasePanel, ({ purchase }) => ({
   purchase: purchase,
