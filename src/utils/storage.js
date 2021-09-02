@@ -32,8 +32,14 @@ class Storage {
     window.localStorage.removeItem(key);
 
     if (this.getPrefix()) {
-      this.cached = this.cached?.filter(namespace => namespace !== key);
+      this.removeCache(key);
     }
+  }
+
+  removeCache(targetNamespace) {
+    this.cached = this.cached?.filter(
+      (namespace) => namespace !== targetNamespace
+    );
   }
 
   clear() {
@@ -41,9 +47,11 @@ class Storage {
   }
 
   removeNamespaceAllItem(prefix) {
+    // eslint-disable-next-line
     this.cached?.forEach((namespace) => {
       if (namespace?.startsWith(prefix)) {
         this.remove(namespace);
+        this.removeCache(namespace);
       }
     });
   }
@@ -66,6 +74,5 @@ class Storage {
     return prefix ? `${prefix}${key}` : key;
   }
 }
-
 
 export default Storage;
