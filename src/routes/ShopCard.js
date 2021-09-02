@@ -9,6 +9,7 @@ import { GetProductActionEffect } from "@/actions/product";
 // 注入读取的数据
 const ProductListWthState = InjectStoreHoc(ProductList, ({ product }) => ({
   products: product?.products,
+  spinStatus: product?.spinStatus
 }));
 const PurchasePanelWthState = InjectStoreHoc(PurchasePanel, ({ purchase }) => ({ purchase: purchase }));
 const SpecificationPickerWthState = InjectStoreHoc(

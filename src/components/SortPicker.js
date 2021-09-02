@@ -8,9 +8,9 @@ const { Option } = Select;
 
 function SortPicker({ dispatch }) {
   const handleSort = (sortType) => {
-  console.log(sortType);
     dispatch({ ...new SortActionPure(sortType) });
   }
+
   return (
     <div>
       <span style={{ fontSize: "1rem" }}>Order by </span>
