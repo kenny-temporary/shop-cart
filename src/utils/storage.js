@@ -1,5 +1,6 @@
 class Storage {
   cached = [];
+  currentKeyMapToNamespace = {};
 
   constructor(options) {
     this.options = {
@@ -21,6 +22,13 @@ class Storage {
 
     // 缓存namespace下的
     this.cached = [...this.cached, namespace];
+    
+    if(namespace?.startsWith(this.getPrefix())){
+      this.currentKeyMapToNamespace = {
+        ...this.currentKeyMapToNamespace,
+        [key]: namespace,
+      }
+    }
   }
 
   get(key) {
@@ -72,6 +80,10 @@ class Storage {
   addPrefix(key) {
     const prefix = this.getPrefix();
     return prefix ? `${prefix}${key}` : key;
+  }
+
+  getKeyMap() {
+    return this.currentKeyMapToNamespace;
   }
 }
 

@@ -18,6 +18,7 @@ export function persistencePurchases(reducer, state, action) {
             storage.set('purchases', currentWorkPurchaseModelState?.purchases);
             storage.set('pannelStatus', currentWorkPurchaseModelState?.openPannel);
             storage.set('totailPrice', currentWorkPurchaseModelState?.totailPrice);
+
             break;
 
         // NOTE: 注意我们在存储storage的时候只能清楚订单相关的, 不可以其余持久化的数据清除了

@@ -76,9 +76,10 @@ export default {
     *updatePurchases(_, { put, select }) {
       const purchases = yield select((state) => state?.purchase?.purchases);
 
-      if (Object.keys(purchases).length === 0) {
-        const prefix = storage.getPrefix();
-        const persistencePurchases = storage.get(prefix + "purchases");
+      const prefix = storage.getPrefix();
+      const persistencePurchases = storage.get(prefix + "purchases");
+
+      if (purchases && Object.keys(purchases).length === 0 && persistencePurchases) {
         const openPannel = storage.get(prefix + "pannelStatus");
         const totailPrice = storage.get(prefix + 'totailPrice');
 
