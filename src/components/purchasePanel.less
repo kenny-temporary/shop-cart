@@ -16,11 +16,13 @@
 .panelContent {
   height: 100%;
   position: relative;
+  overscroll-behavior: none;
 
   .purchaseContent {
     height: calc(100% - 16%);
     overflow-x: hidden;
     overflow-y: scroll;
+    overscroll-behavior: none;
 
     &::-webkit-scrollbar {
       width: 2px;
