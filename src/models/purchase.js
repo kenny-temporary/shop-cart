@@ -63,6 +63,7 @@ export default {
 
     *clearPurchases(_, { put }) {
       const nextWorkPurchases = clearPurchases();
+      
       yield put({
         type: "save",
         payload: {

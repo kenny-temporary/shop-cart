@@ -26,7 +26,7 @@ export function persistencePurchases(reducer, state, action) {
             storage.removeNamespaceAllItem(storage?.getPrefix());
             break;
 
-        case "purchase/closePanel":
+        case "purchase/switchPanel":
             const nextWorkPurchasesState = reducer(state, action)?.purchase;
             storage.set("pannelStatus", nextWorkPurchasesState?.openPannel);
     

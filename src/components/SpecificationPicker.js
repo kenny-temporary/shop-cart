@@ -16,6 +16,7 @@ function SpecificationPicker({ specifications, selected, dispatch }) {
       )}
     >
       <h6 className="text-lg-start fs-5 text-center">Size</h6>
+      
       {specifications?.map((specification) => {
         return (
           <li

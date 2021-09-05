@@ -89,6 +89,7 @@ function PurchasePanel({ purchase, dispatch }) {
             />
           ))}
         </div>
+
         <div
           className={classnames(
             "text-light position-fiexd",
@@ -101,6 +102,7 @@ function PurchasePanel({ purchase, dispatch }) {
               <span className={styles.totalPanelText}>
                 $ {purchase?.totailPrice.toFixed(2)}
               </span>
+
               {!!purchase?.totailPrice && (
                 <div>
                   OR UP TO 9 x $ {(purchase?.totailPrice / 9).toFixed(2)}
